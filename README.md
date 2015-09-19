@@ -2,6 +2,8 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Support via Gratipay][gratipay-image]][gratipay-url]
 
+在fork的基础上，添加了以http开头的url，不使用CDN，当做默认约定.
+
 This library will replace local file references in HTML and other files with CDN locations.  This allows you to work with local copies of libraries during development, and then automate switching to your CDN version when you deploy your application.
 
 For example, if you have a development file that looks like this:
@@ -77,10 +79,10 @@ var cdnizerFactory = require("cdnizer"),
         allowRev: true,
         allowMin: true,
         files: [
-          
+
             // This file is on the default CDN, and will replaced with //my.cdn.host/base/js/app.js
 			'js/app.js',
-			
+
 			// On Google's public CDN
 			{
 				file: 'vendor/angular/angular.js',
@@ -88,7 +90,7 @@ var cdnizerFactory = require("cdnizer"),
 				test: 'window.angular',
 				cdn: '//ajax.googleapis.com/ajax/libs/angularjs/${ version }/angular.min.js'
 			},
-			
+
 			// On Firebase's public CDN
 			{
 				file: 'vendor/firebase/firebase.js',
@@ -97,14 +99,14 @@ var cdnizerFactory = require("cdnizer"),
 			}
 		]
 	});
-              
+
 // Load the file
 var contents = fs.readFileSync('./src/index.html', 'utf8');
-          
+
 // Replace the file's contents
 contents = cdnizer(contents);
 ```
-     
+
 Alternatively, you can just pass in the files array if you don't need to provide any options, and only have custom files:
 
 ```js
@@ -220,7 +222,7 @@ var cdnizerFactory = require("cdnizer"),
 		* [cdn](#optionsfilescdn)
 		* [test](#optionsfilestest)
 
-	
+
 ### cdnizer( options | files )
 
 Creates a new cdnizer function that can be used to process file contents.  You can either pass in a configuration object, or you can pass in an array of files if you don't need to change the default shared options.
