@@ -21,10 +21,10 @@ function makeCdnizer(opts) {
 			didAddFallback = false;
 
 		_.union(opts.matchers, util.matchers).forEach(function(m) {
-			if (url.indexOf('http') === 0) {
-				return match;
-			}
 			contents = contents.replace(m.pattern, function(match, pre, url, post) {
+				if (url.indexOf('http') === 0) {
+					return match;
+				}
 				var fileInfo = util.findFileInfo(url, opts), result, params;
 				if(fileInfo) {
 					result = pre;
